@@ -1,10 +1,8 @@
-from ast import Pass
-from calendar import c
-import numbers
+from Euromillions import Euromillions
+import Euromillions
+
 from sys import platform
 import os
-
-from Euromillions import Euromillions
 
 if platform == "linux" or platform == "linux2":
     clear = lambda: os.system('clear')
@@ -13,23 +11,29 @@ elif platform == "win32":
 
 def main():
     i = 0
+    clear()
+    print("Welcome to Euromillions")
     while True:
-        clear()
-        print("Welcome to Euromillions")
         option = menu()
+        if option == 0:
+            if True: #make exit function
+                return
 
         match option:
             case 1:
-                createNewTicket()
+                ticket = createNewTicket()
+                if ticket.validateTicket():
+                    print(ticket.numbers)
+                    print(ticket.stars)
                 break
             case 2:
                 break
             case _:
                 print("Please enter a valid option")
+                break
+        
+        input("Press any key to continue...")
 
-
-        input()
-        break
 
 def tryParseInt(string, base=None):
     '''helper to parse int from string without erroring on empty or misformed string'''
@@ -44,18 +48,19 @@ def readInt(min, max):
     if min == max:
         return max
     while True:
-        print("Insert a number between " + str(min) + " and " + str(max))
+        print("\nInsert a number between " + str(min) + " and " + str(max))
         userInput = input()
         if userInput == "":
             continue
         userInt = tryParseInt(userInput)
         if userInt >= 0:
             if userInt <= max and userInt >= min:
-                return userInput
+                return userInt
         print(userInput + " is not a number between " + str(min) + " and " + str(max))
     
 
 def menu():
+    clear()
     counter = 1
     print("Menu")
     print(str(counter) + " - Option 1")
@@ -63,17 +68,42 @@ def menu():
     print(str(counter) + " - Option 2")
     counter+=1
     print(str(counter) + " - Option 3")
+    print("0 - Exit")
 
     return readInt(0, counter)
 
 def createNewTicket():
-    euromillions = Euromillions()
+    numbers = []
+    stars = []
+    while len(numbers) < 5:
+        clear()
+        print(numbers if len(numbers) > 0 else "No numbers insterted.")
+        print(str(len(numbers)) + " / 5 numbers")
+        number = readInt(1, 50)
+        if number not in numbers:
+            numbers.append(number)
+        else:
+            print("The number " + str(number) + " was already selected.")
+            input("Press enter to continue...")
     
-    while len(euromillions.numbers) < 5:
-        print(", ".join(euromillions.numbers) if len(euromillions.numbers) > 0 else "Ainda não inseriu números.")
-        print(str(len(euromillions.numbers)) + "/ 5 numbers")
+    numbers.sort()
+    print("All numbers insterted\n" + str(numbers))
+    input("Press enter to continue...")
 
-        
 
+    while len(stars) < 2:
+        clear()
+        print(stars if len(stars) > 0 else "No stars insterted.")
+        print(str(len(stars)) + " / 2 stars")
+        number = readInt(1, 12)
+        if number not in stars:
+            stars.append(number)
+        else:
+            print("The number " + str(number) + " was already selected.")
+            input("Press enter to continue...")
+    stars.sort()
+    print("All stars inserted\n" + str(stars))
+
+    return Euromillions(numbers, stars)
 
 main()
