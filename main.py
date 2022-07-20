@@ -106,4 +106,5 @@ def createNewTicket():
 
     return Euromillions(numbers, stars)
 
+
 main()
