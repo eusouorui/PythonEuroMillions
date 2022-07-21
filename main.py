@@ -1,8 +1,6 @@
-from Euromillions import Euromillions
-import Euromillions
-
 from sys import platform
 import os
+from tkinter import N
 
 if platform == "linux" or platform == "linux2":
     clear = lambda: os.system('clear')
@@ -21,10 +19,14 @@ def main():
 
         match option:
             case 1:
-                ticket = createNewTicket()
-                if ticket.validateTicket():
-                    print(ticket.numbers)
-                    print(ticket.stars)
+                numbers, stars = createNewTicket()
+                isValid, motive = validateTicket(numbers, stars)
+                if(isValid) == True: 
+                    print(motive)
+                    print(numbers)
+                    print(stars)
+                else:
+                    print (motive)
                 break
             case 2:
                 break
@@ -102,9 +104,26 @@ def createNewTicket():
             print("The number " + str(number) + " was already selected.")
             input("Press enter to continue...")
     stars.sort()
-    print("All stars inserted\n" + str(stars))
 
-    return Euromillions(numbers, stars)
+    return (numbers, stars)
 
+def validateTicket (numbers, stars):
+    if len(numbers) > 5:
+        return False, "Too many numbers"
+    if len(numbers) < 5:
+        return False, "Too litle numbers"
+    if len(stars) > 2:
+        return False, "Too many stars"
+    if len(stars) < 2:
+        return False, "Too little stars"
+    if len([*filter(lambda x: x > 50, numbers)]) > 0:
+        return False, "There are numbers greater than 50"
+    if len([*filter(lambda x: x <= 0, numbers)]) > 0:
+            return False, "There are numbers smaller than 1"
+    if len([*filter(lambda x: x > 12, stars)]) > 0:
+        return False, "There are stars greater than 50"
+    if len([*filter(lambda x: x <= 0, numbers)]) > 0:
+            return False, "There are stars smaller than 1"
+    return True, "Ticket is valid"
 
 main()
