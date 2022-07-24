@@ -41,7 +41,7 @@ def tryParseInt(string, base=None):
         return int(string, base) if base else int(string)
     except Exception:
         return -1
--
+
 def readInt(min, max):
     if min > max: 
         pass
