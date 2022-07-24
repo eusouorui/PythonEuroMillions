@@ -1,6 +1,5 @@
 from sys import platform
 import os
-from tkinter import N
 
 if platform == "linux" or platform == "linux2":
     clear = lambda: os.system('clear')
@@ -9,8 +8,7 @@ elif platform == "win32":
 
 def main():
     i = 0
-    clear()
-    print("Welcome to Euromillions")
+    
     while True:
         option = menu()
         if option == 0:
@@ -43,7 +41,7 @@ def tryParseInt(string, base=None):
         return int(string, base) if base else int(string)
     except Exception:
         return -1
-
+-
 def readInt(min, max):
     if min > max: 
         pass
@@ -64,8 +62,9 @@ def readInt(min, max):
 def menu():
     clear()
     counter = 1
+    print("Welcome to Euromillions\n")
     print("Menu")
-    print(str(counter) + " - Option 1")
+    print(str(counter) + " - Register ticket")
     counter+=1
     print(str(counter) + " - Option 2")
     counter+=1
