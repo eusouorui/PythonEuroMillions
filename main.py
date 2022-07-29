@@ -120,7 +120,7 @@ def validateTicket (numbers, stars):
     if len([*filter(lambda x: x <= 0, numbers)]) > 0:
             return False, "There are numbers smaller than 1"
     if len([*filter(lambda x: x > 12, stars)]) > 0:
-        return False, "There are stars greater than 50"
+        return False, "There are stars greater than 12"
     if len([*filter(lambda x: x <= 0, numbers)]) > 0:
             return False, "There are stars smaller than 1"
     return True, "Ticket is valid"
