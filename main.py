@@ -1,5 +1,6 @@
 from sys import platform
 import os
+from tkinter import N
 
 if platform == "linux" or platform == "linux2":
     clear = lambda: os.system('clear')
@@ -64,7 +65,7 @@ def menu():
     clear()
     counter = 1
     print("Menu")
-    print(str(counter) + " - Create ticket")
+    print(str(counter) + " - Option 1")
     counter+=1
     print(str(counter) + " - Option 2")
     counter+=1
