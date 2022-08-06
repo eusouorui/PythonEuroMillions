@@ -1,6 +1,5 @@
 from sys import platform
 import os
-from tkinter import N
 
 if platform == "linux" or platform == "linux2":
     clear = lambda: os.system('clear')
@@ -9,8 +8,7 @@ elif platform == "win32":
 
 def main():
     i = 0
-    clear()
-    print("Welcome to Euromillions")
+    
     while True:
         option = menu()
         if option == 0:
@@ -64,8 +62,9 @@ def readInt(min, max):
 def menu():
     clear()
     counter = 1
+    print("Welcome to Euromillions\n")
     print("Menu")
-    print(str(counter) + " - Option 1")
+    print(str(counter) + " - Register ticket")
     counter+=1
     print(str(counter) + " - Option 2")
     counter+=1
@@ -121,7 +120,7 @@ def validateTicket (numbers, stars):
     if len([*filter(lambda x: x <= 0, numbers)]) > 0:
             return False, "There are numbers smaller than 1"
     if len([*filter(lambda x: x > 12, stars)]) > 0:
-        return False, "There are stars greater than 50"
+        return False, "There are stars greater than 12"
     if len([*filter(lambda x: x <= 0, numbers)]) > 0:
             return False, "There are stars smaller than 1"
     return True, "Ticket is valid"
