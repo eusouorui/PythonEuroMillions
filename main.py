@@ -36,7 +36,7 @@ def main():
 
 
 def tryParseInt(string, base=None):
-    '''helper to parse int from string without erroring on empty or misformed string'''
+    #helper to parse int from string without erroring on empty or misformed string
     try:
         return int(string, base) if base else int(string)
     except Exception:
