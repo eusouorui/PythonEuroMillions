@@ -1,10 +1,10 @@
 from sys import platform
 import os
 
-if platform == "linux" or platform == "linux2":
-    clear = lambda: os.system('clear')
-elif platform == "win32":
+if platform == "win32":
     clear = lambda: os.system('cls')
+else:
+    clear = lambda: os.system('clear')
 
 def main():
     i = 0
@@ -36,7 +36,7 @@ def main():
 
 
 def tryParseInt(string, base=None):
-    #helper to parse int from string without erroring on empty or misformed string
+    '''helper to parse int from string without erroring on empty or misformed string'''
     try:
         return int(string, base) if base else int(string)
     except Exception:
